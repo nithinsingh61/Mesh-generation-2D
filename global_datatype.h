@@ -11,14 +11,16 @@
 
 #include <CGAL/Quotient.h>
 #include <CGAL/Simple_cartesian.h>
+#include <CGAL/Direction_2.h>
 
 //#ifdef WIN32
 #include <CGAL/Filtered_kernel.h>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
+#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 //#else
-	//#include <CGAL/Arithmetic_filter.h>
+//#include <CGAL/Arithmetic_filter.h>
 //#endif
-
+#include <CGAL/Triangulation_2.h>
 #include <CGAL/Triangulation_face_base_2.h>
 #include <CGAL/Triangulation_vertex_base_2.h>
 #include <CGAL/Triangulation_vertex_base_with_info_2.h>
@@ -75,7 +77,7 @@ class Delaunay_face_2D : public Fb
 
 	typedef Fb											Base;
 	typedef typename Fb::Triangulation_data_structure   TDS;
-	
+
 public:
 	typedef Gt											Geom_traits;
 	typedef TDS											Triangulation_data_structure;
@@ -108,13 +110,19 @@ public:
 
 //Globals for 2D
 
-typedef CGAL::Simple_cartesian<double> Rep;
-typedef CGAL::Filtered_kernel<Rep> my_K;
+//typedef CGAL::Simple_cartesian<long double> Rep;
+typedef CGAL::Exact_predicates_exact_constructions_kernel Rep;
+
 //typedef CGAL::Exact_predicates_exact_constructions_kernel my_K;
+
+typedef CGAL::Filtered_kernel<Rep> my_K;
+//typedef CGAL::Exact_predicates_inexact_constructions_kernel my_K;
 struct K : public my_K {} ;
 
+//typedef CGAL::Direction_2<my_K>									Direction_2;
+
 typedef CGAL::Triangulation_euclidean_traits_2<K>				Traits_2d;
-typedef Delaunay_vertex_2D<K>									vb1; 
+typedef Delaunay_vertex_2D<K>									vb1;
 typedef Delaunay_face_2D<K>										fb1;
 typedef CGAL::Triangulation_data_structure_2<vb1,fb1>			Tds_2d;
 typedef CGAL::Delaunay_triangulation_2<Traits_2d, Tds_2d>		Delaunay;
@@ -122,7 +130,7 @@ typedef CGAL::Delaunay_triangulation_2<Traits_2d, Tds_2d>		Delaunay;
 typedef CGAL::Segment_2<Rep>									line_2d;
 //typedef CGAL::Segment_2											line_2d;
 //typedef my_K::Segment_2											line_2d;
-
+//typedef CGAL::Direction_2<Rep>									Direction_2;
 
 typedef Delaunay::Face_circulator								Face_circulator;
 typedef Delaunay::Finite_faces_iterator							Finite_faces_iterator_2d;
@@ -135,6 +143,7 @@ typedef Delaunay::Vertex_handle									vh;
 typedef Delaunay::Face_circulator								Face_circulator;
 typedef Delaunay::Face_handle									fh;
 typedef Delaunay::Point											Point;
+
 //typedef Delaunay::Iso_rectangle_2											Iso_rectangle_2;
 
 /*typedef CGAL::Point_2<Rep>									Point_2d;
