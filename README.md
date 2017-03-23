@@ -26,6 +26,11 @@ $ ./code.cpp
 ```
 * In case of build failure try clearing cache of cmake
 
+### Progress pics
+* [Drive](https://drive.google.com/open?id=0BzT2RJmWrKsiYU50MVNmeE1qa00)
+* [Imgur](http://imgur.com/a/jrH18)
+
+
 ## To-do list 
 - [x] Topology recover 
 - [ ] Clean the code 
